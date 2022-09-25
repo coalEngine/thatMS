@@ -6,7 +6,7 @@ pygame.init()
 
 # Window Handling
 window = pygame.display.set_mode((800, 600))
-
+pygame.display.set_caption("That Magic Swordsmen")
 
 
 running = True
