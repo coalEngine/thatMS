@@ -1,3 +1,8 @@
+import pygame
+
+
+pygame.init()
+
 class Entity():
     def __init__(self, name, hp, mana, x, y ):
         self.name = name
@@ -6,8 +11,8 @@ class Entity():
         self.x = x
         self.y = y
 
-    def draw(self):
-        pass
+    def draw(self, window_1, filename, x, y):
+        window_1.blit(filename, (x, y))
 
     def update(self):
         pass
