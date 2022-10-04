@@ -4,6 +4,7 @@ import pygame
 pygame.init()
 
 class Entity():
+
     def __init__(self, name, hp, mana, x, y ):
         self.name = name
         self.hp = hp
@@ -14,5 +15,7 @@ class Entity():
     def draw(self, window_1, filename, x, y):
         window_1.blit(filename, (x, y))
 
-    def update(self):
-        pass
+    def update(self, time, y):
+        gravity = 0.2
+        y += gravity
+
