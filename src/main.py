@@ -1,9 +1,10 @@
 import pygame
-from src.entity import Entity
+from game import World
+from game import Entity
 
 
 # Initialization
-pygame.init()
+
 
 
 # Window Handling
@@ -14,15 +15,11 @@ pygame.display.set_caption("That Magic Swordsmen")
 # Entities
 player = Entity("Magus Flame", 100, 100, 0, 0)
 
+if __name__ == "__main__":
+    world = World()
 
 
-running = True
-while running:
-    window.fill((0, 0, 0))
-    pygame.display.update()
-    for evt in pygame.event.get():
-        if evt.type == pygame.QUIT:
-            running = False
-
-
-
+while True:
+    world.update()
+    world.handle_events()
+    world.draw()
