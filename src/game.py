@@ -12,7 +12,7 @@ class World():
         self.clock = pygame.time.Clock()
         self.bg_color = pygame.Color("White")
 
-        self.tiles = Tiles("res/tmsSprites.png", 32, 32, 3, 4)
+        self.tiles = Tiles("res/tmsSprites.png", 32, 32, 2, 4)
 
     def handle_events(self):
         for evt in pygame.event.get():
@@ -25,7 +25,8 @@ class World():
 
     def draw(self):
         self.window.fill(self.bg_color)
-        self.tiles.draw(self.window)
+        # self.tiles.draw(self.window)
+        self.window.blit(self.tiles.grab_tile(2, 0), (200,200))
         pygame.display.flip()
 
 

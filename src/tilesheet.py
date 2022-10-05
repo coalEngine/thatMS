@@ -12,7 +12,9 @@ class Tiles:
                 rect = (tile_x * width, tile_y * height, width, height)
                 line.append(img.subsurface(rect))
 
+    def grab_tile(self, x, y):
+        return self.tile_table[x][y]
     def draw(self, window):
         for x, row in enumerate(self.tile_table):
             for y, tile in enumerate(row):
-                window.blit(tile, (x * 32, y * 32))
+                window.blit(tile, (x * 24, y * 24))
