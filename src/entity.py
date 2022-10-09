@@ -1,6 +1,17 @@
 import pygame
-
+pygame.init()
 
 class Entity():
-    def __init__(self, nM, HP, MP, ST):
-        pygame.init()
+    def __init__(self, Sprite, nM, HP, MP, ST):
+        self.character = Sprite
+        self.name = nM
+        self.health_points = HP
+        self.mana_points = MP
+        self.stamina = ST
+
+    def spawn(self, x, y, sprite):
+        pass
+    def update(self, dt):
+        pass
+    def destroy(self):
+        pass
