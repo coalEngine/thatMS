@@ -1,25 +1,36 @@
 import pygame
-from game import World
-from game import Entity
 
 
 # Initialization
-
+pygame.init()
 
 
 # Window Handling
+pygame.display.set_caption("That Magical Swordsmen")
 window = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("That Magic Swordsmen")
+BG = (50, 50, 50)
+BLACK = (0,0,0)
+
+# Sprites
+player_img = pygame.image.load("res/tmdS.png").convert_alpha()
 
 
-# Entities
-player = Entity("Magus Flame", 100, 100, 0, 0)
+def get_sprite(sheet, width, height, scale):
+    img = pygame.Surface((width, height)).convert_alpha()
+    img.blit(sheet, (0,0), (0,0,width,height))
+    img = pygame.transform.scale(img, (width * scale, height * scale))
+    return img
 
-if __name__ == "__main__":
-    world = World()
 
+frame_0 = get_sprite(player_img, 32, 32, 3)
+run = True
+while run:
+    window.fill(BG)
+    window.blit(frame_0, (0,0))
+    for evt in pygame.event.get():
+        if evt.type == pygame.QUIT:
+            run = False
 
-while True:
-    world.update()
-    world.handle_events()
-    world.draw()
+    pygame.display.update()
+
+pygame.quit()
