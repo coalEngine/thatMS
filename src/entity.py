@@ -1,4 +1,5 @@
 import pygame
+import sprites
 pygame.init()
 
 class Entity():
@@ -8,10 +9,11 @@ class Entity():
         self.health_points = HP
         self.mana_points = MP
         self.stamina = ST
+        self.x = 0
+        self.y = 0
+        self.gravity = 2
+    def spawn(self, x, y, sprite, window):
+        window.blit(sprite, (x, y))
 
-    def spawn(self, x, y, sprite):
-        pass
-    def update(self, dt):
-        pass
     def destroy(self):
         pass

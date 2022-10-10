@@ -8,9 +8,11 @@ pygame.init()
 
 # Window Handling
 pygame.display.set_caption("Traveling Magical Swordsmen")
-window = pygame.display.set_mode((800, 600))
+window_y = 600
+window_x = 800
+window = pygame.display.set_mode((window_x, window_y))
 BG = (50, 50, 50)
-BLACK = (0,0,0)
+
 
 # Sprites
 player_img = pygame.image.load("res/tmdS.png").convert_alpha()
@@ -23,6 +25,8 @@ last_Time = pygame.time.get_ticks()
 animation_runtime = 1000
 frame = 0
 step_counter = 0
+# Entity
+Player = entity.Entity(Sprite, "tms", 100, 100, 100)
 
 
 for animation in animation_steps:
@@ -43,8 +47,11 @@ while run:
         last_Time = current_time
         if frame >= len(animation_list[action]):
             frame = 0
-
-    window.blit(animation_list[action][frame], (0, 0))
+    Player.y += Player.gravity
+    if Player.y >= 504:
+        Player.gravity = 0
+        Player.y = 504
+    Player.spawn(Player.x, Player.y, animation_list[action][frame], window)
     for evt in pygame.event.get():
         if evt.type == pygame.QUIT:
             run = False
