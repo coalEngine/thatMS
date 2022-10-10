@@ -17,6 +17,8 @@ BG = (50, 50, 50)
 # Sprites
 player_img = pygame.image.load("res/tmdS.png").convert_alpha()
 Sprite = sprites.Spritesheet(player_img)
+
+
 # Animation
 animation_list = []
 animation_steps = [2, 2]
@@ -25,6 +27,8 @@ last_Time = pygame.time.get_ticks()
 animation_runtime = 1000
 frame = 0
 step_counter = 0
+
+
 # Entity
 Player = entity.Entity(Sprite, "tms", 100, 100, 100)
 
@@ -47,11 +51,14 @@ while run:
         last_Time = current_time
         if frame >= len(animation_list[action]):
             frame = 0
+
     Player.y += Player.gravity
     if Player.y >= 504:
         Player.gravity = 0
         Player.y = 504
+
     Player.spawn(Player.x, Player.y, animation_list[action][frame], window)
+
     for evt in pygame.event.get():
         if evt.type == pygame.QUIT:
             run = False
