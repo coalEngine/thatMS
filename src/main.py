@@ -1,7 +1,6 @@
 import pygame
+import entity
 import sprites
-from entity import Entity
-
 
 # Initialization
 pygame.init()
@@ -18,7 +17,7 @@ player_img = pygame.image.load("res/tmdS.png").convert_alpha()
 Sprite = sprites.Spritesheet(player_img)
 # Animation
 animation_list = []
-player_animation_steps = [2, 2]
+animation_steps = [2, 2]
 action = 0
 last_Time = pygame.time.get_ticks()
 animation_runtime = 1000
@@ -26,7 +25,7 @@ frame = 0
 step_counter = 0
 
 
-for animation in player_animation_steps:
+for animation in animation_steps:
     temp_img_list = []
     for _ in range(animation):
         temp_img_list.append(Sprite.get_sprite(step_counter, 32, 32, 3))

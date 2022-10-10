@@ -1,5 +1,6 @@
 import pygame
 
+
 class Spritesheet():
     def __init__(self, img):
         self.sheet = img
@@ -10,5 +11,6 @@ class Spritesheet():
         img = pygame.transform.scale(img, (width * scale, height * scale))
         return img
 
-    def play_animation(self, frames, width, height, scale, runtime):
+    def play_animation(self,
+                       frame, width, height, scale, animation_runtime, action, last_time):
         pass
