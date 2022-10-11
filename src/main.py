@@ -30,7 +30,7 @@ step_counter = 0
 
 
 # Entity
-Player = entity.Entity(Sprite, "tms", 100, 100, 100)
+Player = entity.Entity(Sprite, "tms", 100, 100, 100, 6)
 
 
 for animation in animation_steps:
@@ -65,8 +65,10 @@ while run:
         if evt.type == pygame.KEYDOWN:
             if evt.key == pygame.K_d:
                 action = 0
+                Player.x += Player.speed
             if evt.key == pygame.K_a:
                 action = 1
+                Player.x -= Player.speed
 
     pygame.display.update()
 
