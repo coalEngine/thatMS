@@ -1,21 +1,58 @@
-import pygame
+import pygame, sys
 import entity
 import sprites
+from settings import *
 
 # Initialization
-pygame.init()
 
 
-# Window Handling
-pygame.display.set_caption("Traveling Magical Swordsmen")
-window_y = 600
-window_x = 800
-window = pygame.display.set_mode((window_x, window_y))
-BG = (50, 50, 50)
+class Game():
+    def __init__(self,):
+        pygame.init()
+        # Window Handling
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.clock = pygame.time.Clock()
+        self.name = pygame.display.set_caption("Traveling Magical Swordsmen")
+        self.BG = (50, 50, 50)
+
+    def run(self):
+        while True:
+            self.screen.fill(self.BG)
+
+            # Update Animation
+            current_time = pygame.time.get_ticks()
+
+            if current_time - last_Time >= animation_runtime:
+                frame += 1
+                last_Time = current_time
+                if frame >= len(animation_list[action]):
+                    frame = 0
+
+            Player.y += Player.gravity
+            if Player.y >= 504:
+                Player.gravity = 0
+                Player.y = 504
+
+            Player.spawn(Player.x, Player.y, animation_list[action][frame], window)
+
+            for evt in pygame.event.get():
+                if evt.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if evt.type == pygame.KEYDOWN:
+                    if evt.key == pygame.K_d:
+                        action = 0
+                        Player.x += Player.speed
+                    if evt.key == pygame.K_a:
+                        action = 1
+                        Player.x -= Player.speed
+            self.screen.fill(self.BG)
+            self.clock.tick(FPS)
+            self.name.screen = self.name
 
 
 # Sprites
-player_img = pygame.image.load("res/tmdS.png").convert_alpha()
+player_img = pygame.image.load("gfx/art/tmdS.png").convert_alpha()
 Sprite = sprites.Spritesheet(player_img)
 
 
@@ -28,7 +65,6 @@ animation_runtime = 1000
 frame = 0
 step_counter = 0
 
-
 # Entity
 Player = entity.Entity(Sprite, "tms", 100, 100, 100, 6)
 
@@ -40,36 +76,7 @@ for animation in animation_steps:
         step_counter += 1
     animation_list.append(temp_img_list)
 
-run = True
-while run:
-    window.fill(BG)
-    # Update Animation
-    current_time = pygame.time.get_ticks()
 
-    if current_time - last_Time >= animation_runtime:
-        frame += 1
-        last_Time = current_time
-        if frame >= len(animation_list[action]):
-            frame = 0
-
-    Player.y += Player.gravity
-    if Player.y >= 504:
-        Player.gravity = 0
-        Player.y = 504
-
-    Player.spawn(Player.x, Player.y, animation_list[action][frame], window)
-
-    for evt in pygame.event.get():
-        if evt.type == pygame.QUIT:
-            run = False
-        if evt.type == pygame.KEYDOWN:
-            if evt.key == pygame.K_d:
-                action = 0
-                Player.x += Player.speed
-            if evt.key == pygame.K_a:
-                action = 1
-                Player.x -= Player.speed
-
-    pygame.display.update()
-
-pygame.quit()
+if __name__ == "__main__":
+    game = Game()
+    game.run()
